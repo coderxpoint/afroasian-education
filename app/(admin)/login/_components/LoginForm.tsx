@@ -13,7 +13,7 @@ export default function LoginPage() {
   useEffect(() => {
     const auth = localStorage.getItem("isAuthenticated");
     if (auth === "true") {
-      router.push("/dashboard"); 
+      router.push("/dashboard");
     }
   }, [router]);
 
@@ -23,7 +23,10 @@ export default function LoginPage() {
     const username = formData.get("username");
     const password = formData.get("password");
 
-    if (username === "admin" && password === "password123") {
+    if (
+      username === process.env.NEXT_PUBLIC_ADMIN_USERNAME &&
+      password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+    ) {
       localStorage.setItem("isAuthenticated", "true");
       router.push("/dashboard");
     } else {

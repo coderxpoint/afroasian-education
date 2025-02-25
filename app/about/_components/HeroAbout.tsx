@@ -14,7 +14,7 @@ export default function HeroAbout() {
   ];
 
   return (
-    <div className="w-full mx-auto px-4 justify-center items-center flex">
+    <div className="w-full  mx-auto px-4 justify-center items-center flex">
       <div className="max-w-6xl grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Text Section */}
         <div className="space-y-8 order-2 lg:order-1">

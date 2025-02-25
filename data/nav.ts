@@ -42,7 +42,6 @@ export const socialLinks: SocialLink[] = [
     href: "https://www.facebook.com/people/Afroasian-Education/61567383308551/",
     icon: Facebook,
   },
-  { title: "Twitter", href: "#", icon: Twitter },
   {
     title: "Instagram",
     href: "https://www.instagram.com/afroasianeducation/",

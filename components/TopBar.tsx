@@ -20,10 +20,6 @@ const socialLinks = [
     href: "https://www.facebook.com/people/Afroasian-Education/61567383308551/",
   },
   {
-    icon: <Twitter size={20} />,
-    href: "#",
-  },
-  {
     icon: <Linkedin size={20} />,
     href: "https://www.linkedin.com/company/afroasian-education",
   },

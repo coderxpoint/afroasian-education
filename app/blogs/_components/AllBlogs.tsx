@@ -155,7 +155,8 @@ export default function AllBlogs() {
                   <div className="mt-4 flex items-center text-[#e86034] group-hover:text-[#e86034] transition-colors">
                     {/* <span className="mr-2">Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div> */}
+                    */}
+                  </div>
                 </div>
               </div>
             </Link>

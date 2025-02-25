@@ -182,11 +182,12 @@ export default function UniversityPageDetails({
                           <strong>Duration:</strong> {program.duration}
                         </p>
                         <p>
-                          <strong> Session:</strong> ₹{program.session}
+                          <strong> Session:</strong> {program.session}
                         </p>
                         <button className="bg-orange-500 text-white  text-center py-2 px-4 rounded-md mt-4 hover:bg-orange-600">
                           <Link
-                            href={`/university/${university.visit}/${program.visit}`}
+                            // href={`/university/${university.visit}/${program.visit}`}
+                            href={`#`}
                           >
                             View Details
                           </Link>

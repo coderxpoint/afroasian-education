@@ -39,7 +39,7 @@ export default function AboutPage() {
       <HeroAbout />
       <TabsContent />
       <OurJourney />
-      <StudentFeedback />
+      {/* <StudentFeedback /> */}
       <div className="pb-10">
         <BannerHome />
       </div>

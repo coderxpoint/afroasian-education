@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { EnrollButton } from "@/components/EnrollButton";
 
 export default function MedicalPrograms() {
   const iconMap = [Stethoscope, GraduationCap, BookOpen];
@@ -72,13 +73,14 @@ export default function MedicalPrograms() {
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <Link
+                          {/* <Link
                             href="/contact"
                             className="group/link flex items-center text-[#e86034] hover:underline"
                           >
                             Know More
                             <ArrowRight className="ml-1 w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" />
-                          </Link>
+                          </Link> */}
+                          <EnrollButton/>
                         </div>
                       </div>
                     </div>

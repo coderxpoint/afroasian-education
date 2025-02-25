@@ -10,6 +10,7 @@ import {
 } from "@/data/nav";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
+import { EnrollButton } from "./EnrollButton";
 
 export default function Footer() {
   return (
@@ -25,9 +26,10 @@ export default function Footer() {
             <p className="font-bold w-1/2 text-[#00306e] text-2xl leading-tight">
               Become an Instructor & Share Your Expertise
             </p>
-            <Button className="mt-4 bg-[#e86034] text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 hover:bg-orange-500">
+            {/* <Button className="mt-4 bg-[#e86034] text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 hover:bg-orange-500">
               <Link href={"/"}>Learn More</Link>
-            </Button>
+            </Button> */}
+            <EnrollButton/>
           </div>
         </div>
         {/* Card 2 */}
@@ -39,9 +41,10 @@ export default function Footer() {
             <p className="font-bold w-1/2 text-[#00306e] text-2xl leading-tight">
               Enhance Your Skills & Stay Ahead
             </p>
-            <Button className="mt-4 bg-[#e86034] text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 hover:bg-orange-500">
+            {/* <Button className="mt-4 bg-[#e86034] text-white font-semibold py-2 px-6 rounded-md transition-all duration-300 hover:bg-orange-500">
               Explore Courses
-            </Button>
+            </Button> */}
+            <EnrollButton/>
           </div>
         </div>
       </div>

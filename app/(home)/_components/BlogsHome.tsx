@@ -158,7 +158,7 @@ export default function BlogsHome() {
                     {/* <span className="mr-2">Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div> */}
-                  <EnrollButton/>
+                  {/* <EnrollButton/> */}
                 </div>
               </div>
             </Link>

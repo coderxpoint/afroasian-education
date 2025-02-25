@@ -107,7 +107,7 @@ export default function BlogsHome() {
         {/* Blogs Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {blogs.slice(0, 3).map((blog) => (
-            <Link href={`/blog/${blog.id}`} key={blog.id} className="group">
+            <Link href={`#`} key={blog.id} className="group">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
                 {/* Blog Image */}
                 <div className="relative h-56 w-full">
@@ -157,8 +157,9 @@ export default function BlogsHome() {
                   <div className="mt-4 flex items-center text-[#e86034] group-hover:text-[#e86034] transition-colors">
                     {/* <span className="mr-2">Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div> */}
-                  {/* <EnrollButton/> */}
+                  */}
+                    {/* <EnrollButton/> */}
+                  </div>
                 </div>
               </div>
             </Link>

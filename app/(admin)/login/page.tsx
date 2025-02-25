@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Login() {
+export default function Loginkbjulilu() {
   return (
-    <div>Login</div>
+    <div>Loginkbjulilu</div>
   )
 }

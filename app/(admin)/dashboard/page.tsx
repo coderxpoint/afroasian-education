@@ -1,14 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContactFormSection from "./_components/ContactFormSection";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoanFormSection from "./_components/LoanFormSection";
 import EnrollNowFormSection from "./_components/EnrollNowFormSection";
 import ApplyToUniversityFormSection from "./_components/ApplyToUniversityFormSection";
+import { useRouter } from "next/navigation";
+import LogoutButton from "@/components/LogoutButton";
 
 const DashboardPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("contact");
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("isAuthenticated");
+    if (auth !== "true") {
+      router.push("/login"); // Redirect to login if not authenticated
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [router]);
+
+  if (!isAuthenticated) return null;
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -59,8 +74,10 @@ const DashboardPage: React.FC = () => {
             </li>
           </ul>
         </nav>
+        <LogoutButton />
       </aside>
 
+            
       {/* Main Content */}
       <div className="flex-1 p-4">
         <Tabs value={activeTab} className="mb-4">

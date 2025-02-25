@@ -111,7 +111,7 @@ export default function AllBlogs() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {filteredBlogs.map((blog) => (
-            <Link href={`/blog/${blog.id}`} key={blog.id} className="group">
+            <Link href={`#`} key={blog.id} className="group">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
                 <div className="relative h-56 w-full">
                   <Image

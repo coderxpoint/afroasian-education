@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ArrowRight, Clock } from "lucide-react";
+import { EnrollButton } from "@/components/EnrollButton";
 
 // Define Blog type
 interface Blog {
@@ -154,9 +155,10 @@ export default function BlogsHome() {
 
                   {/* Read More */}
                   <div className="mt-4 flex items-center text-[#e86034] group-hover:text-[#e86034] transition-colors">
-                    <span className="mr-2">Read More</span>
+                    {/* <span className="mr-2">Read More</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  </div> */}
+                  <EnrollButton/>
                 </div>
               </div>
             </Link>

@@ -28,7 +28,7 @@ export function SearchButton() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
         
-        <Search size={30} className=" text-gray-600 flex items-center    justify-center font-bold" />{" "}
+        <Search size={20} className=" text-gray-600 flex items-center    justify-center font-bold" />{" "}
         {/* Search icon */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white rounded-lg border border-gray-200 shadow-2xl p-6">

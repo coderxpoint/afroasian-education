@@ -68,8 +68,8 @@ export const contactInfo = {
   phones: [
     { number: "+91 98711 26409", href: "tel:+919871126409" },
     { number: "+91 92205 06409", href: "tel:+919220506409" },
-    { number: "+91 123120779", href: "tel:+911203120779" },
-    { number: "+91 123200419", href: "tel:+911203200419" },
+    { number: "+120 3120779", href: "tel:+1203120779" },
+    { number: "+120 3200419", href: "tel:+1203200419" },
   ],
   email: {
     address: "support@afroasianeducation.com",

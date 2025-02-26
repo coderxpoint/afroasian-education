@@ -96,7 +96,7 @@ export const navigationLinks = [
   },
   {
     href: "/loan",
-    label: "Loan",
+    label: "Loans",
     content: [
       {
         title: "HDFC",

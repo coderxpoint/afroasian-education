@@ -8,6 +8,7 @@ import EnrollNowFormSection from "./_components/EnrollNowFormSection";
 import ApplyToUniversityFormSection from "./_components/ApplyToUniversityFormSection";
 import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
+import AdmissionForm from "./_components/AdmissionForm";
 
 const DashboardPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("contact");
@@ -72,12 +73,21 @@ const DashboardPage: React.FC = () => {
                 University Form
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => setActiveTab("admission")}
+                className={`w-full text-left p-2 rounded hover:bg-gray-700 ${
+                  activeTab === "admission" ? "bg-gray-600" : ""
+                }`}
+              >
+               Admission Form
+              </button>
+            </li>
           </ul>
         </nav>
         <LogoutButton />
       </aside>
 
-            
       {/* Main Content */}
       <div className="flex-1 p-4">
         <Tabs value={activeTab} className="mb-4">
@@ -86,6 +96,7 @@ const DashboardPage: React.FC = () => {
             <TabsTrigger value="loan">Loan Form</TabsTrigger>
             <TabsTrigger value="enroll_now">Enroll Now Form</TabsTrigger>
             <TabsTrigger value="university">University Form</TabsTrigger>
+            <TabsTrigger value="admission">Admission Form</TabsTrigger>
           </TabsList>
           <TabsContent value="contact">
             <ContactFormSection />
@@ -98,6 +109,9 @@ const DashboardPage: React.FC = () => {
           </TabsContent>
           <TabsContent value="university">
             <ApplyToUniversityFormSection />
+          </TabsContent>
+          <TabsContent value="admission">
+            <AdmissionForm />
           </TabsContent>
         </Tabs>
       </div>

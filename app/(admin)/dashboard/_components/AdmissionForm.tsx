@@ -63,7 +63,7 @@ const AdmissionForm: React.FC = () => {
 
   return (
     <div className="w-full flex px-4">
-      <div className="max-w-6xl mx-auto justify-center">
+      <div className="max-w-6xl w-full mx-auto justify-center">
         <h2 className="text-xl font-semibold mb-2">Submitted Contacts</h2>
         {error && <p className="text-red-500">{error}</p>}
         <Table>

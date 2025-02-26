@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ApplyUniversity } from "@/components/ApplyToUniversity";
 import { DownloadBrochure } from "@/components/DownloadBrochure";
 import Link from "next/link";
+import { GraduationCap, Award, DollarSign } from "lucide-react";
 
 type ProgramParams = {
   slug: string;
@@ -30,7 +31,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
     <div className="flex flex-col pb-20 gap-20">
       {/* Hero Section */}
       <div
-        className="lg:h-[50vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[20vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
+        className="lg:h-[50vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[50vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
         before:absolute before:inset-0 before:bg-black before:opacity-60 before:backdrop-blur-sm"
       >
         <div className="relative z-10 max-w-6xl px-4 w-full gap-2 flex py-10 justify-center items-start h-full flex-col mx-auto">
@@ -53,47 +54,72 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
       {/* Program Details */}
       <div className="w-full flex px-4 justify-center items-center">
-        <div className="max-w-6xl w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Duration Card */}
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-semibold text-[#00306e] mb-4">
-                  Duration
-                </h3>
-                <p className="text-gray-700 text-lg">{programData.duration}</p>
-              </CardContent>
-            </Card>
-
-            {/* Eligibility Card */}
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-semibold text-[#00306e] mb-4">
-                  Eligibility
-                </h3>
-                <p className="text-gray-700 text-lg">
-                  {programData.eligibility}
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Fee Card */}
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <CardContent className="p-0">
-                <h3 className="text-2xl font-semibold text-[#00306e] mb-4">
-                  Program Fee
-                </h3>
-                <p className="text-gray-700 text-lg">{programData.fee}</p>
+        <div className="max-w-6xl w-full flex gap-20 flex-col">
+          {/* about */}
+          <div>
+            <Card>
+              <CardContent className="p-6">
+                <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+                  About Kyrgyzstan
+                </h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    {programData.about}
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>
+          {/* about */}
 
-          {/* Additional Information */}
-          <div className="mt-12">
-            <h2 className="text-3xl font-bold text-[#00306e] mb-6">
+          {/* program details card start */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Duration",
+                value: programData.duration,
+              },
+              {
+                title: "Eligibility",
+                value: programData.eligibility,
+              },
+              {
+                title: "Program Fee",
+                value: programData.fee,
+              },
+              {
+                title: "session",
+                value: programData.session,
+              },
+            ].map((item, index) => (
+              <Card
+                key={index}
+                className="p-6 hover:shadow-lg transition-shadow"
+              >
+                <CardContent className="p-0">
+                  <h3 className="text-2xl font-semibold text-[#00306e] mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-700 text-lg">{item.value}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          {/* program details card end */}
+
+          {/* Additional Information start */}
+          <div className="">
+            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
               Why Choose This Program?
             </h2>
-            <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="bg-gray-50 p-6 gap-2 flex flex-col rounded-lg">
+              <span className="text-lg">
+                Kyrgyzstan has emerged as a favored destination for students,
+                particularly those looking to pursue MBBS abroad. Its
+                well-regarded medical universities, cost-effective education
+                system, and strong infrastructure make it an attractive option
+                for Indian students.
+              </span>
               <ul className="list-disc list-inside space-y-3 text-gray-700">
                 <li>Internationally recognized degree</li>
                 <li>Expert faculty members with industry experience</li>
@@ -103,6 +129,109 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
               </ul>
             </div>
           </div>
+          {/* Additional Information end */}
+
+          {/* top reasons */}
+          <div className="">
+            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+              Top Reasons to Study in Kyrgyzstan
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Affordable Tuition Fees",
+                  description:
+                    "MBBS in Kyrgyzstan is much more budget-friendly compared to private medical colleges.",
+                },
+                {
+                  title: "Globally Accredited Universities",
+                  description:
+                    "Major medical universities in Kyrgyzstan are recognized by NMC (formerly MCI), WHO, and UNESCO.",
+                },
+                {
+                  title: "English Medium Instruction",
+                  description:
+                    "Most universities provide MBBS programs in English, facilitating easier learning for Students.",
+                },
+                {
+                  title: "No Donation Required",
+                  description:
+                    "Unlike many institutions, Kyrgyz universities do not require donations for admission.",
+                },
+                {
+                  title: "Diverse Student Community",
+                  description:
+                    "You can study alongside peers from around the globe and create lasting international connections.",
+                },
+              ].map((reason, index) => (
+                <Card
+                  key={index}
+                  className="p-6 hover:shadow-lg transition-shadow bg-white"
+                >
+                  <CardContent className="p-0">
+                    <h3 className="text-2xl font-semibold text-[#00306e] mb-4">
+                      {reason.title}
+                    </h3>
+                    <p className="text-gray-700 text-lg">
+                      {reason.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          {/* top reasons */}
+
+          {/* quality education  */}
+          <div className="">
+            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+              Quality Education in Kyrgyzstan
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Quality Education",
+                  description:
+                    "Kyrgyzstan has several universities that offer MBBS programs recognized by international medical bodies like the World Health Organization (WHO), allowing graduates to practice medicine globally.",
+                  icon: GraduationCap,
+                },
+                {
+                  title: "Affordability",
+                  description:
+                    "Studying MBBS in Kyrgyzstan is often considered affordable compared to many other countries offering medical education. However, affordability can still vary based on factors like the university you choose.",
+                  icon: DollarSign,
+                },
+                {
+                  title: "Recognition",
+                  description:
+                    "The recognition of an MBBS degree obtained in Kyrgyzstan is an important consideration for international students, as it determines whether you'll be able to practice medicine in your home country or in other countries.",
+                  icon: Award,
+                },
+              ].map((item, index) => (
+                <Card
+                  key={index}
+                  className="p-6 hover:shadow-lg transition-shadow bg-white"
+                >
+                  <CardContent className="p-0">
+                    <div className="flex items-center gap-3 mb-4">
+                      <item.icon className="h-8 w-8 text-[#00306e]" />
+                      <h3 className="text-2xl font-semibold text-[#00306e]">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-700 text-lg">{item.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          {/* quality education  */}
+
+          {/* Curriculam struct */}
+          {/* Curriculam struct */}
+
+          {/* fees */}
+          {/* fees */}
         </div>
       </div>
     </div>

@@ -24,7 +24,7 @@ export default function HomePage() {
       <Steps />
       <StudentSaying />
       <TestimonialsSection />
-      {/* <BlogsHome /> */}
+      <BlogsHome />
       <CallToAction />
     </div>
   );

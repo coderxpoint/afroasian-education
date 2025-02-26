@@ -2,12 +2,14 @@ export const programsDetails = [
   {
     slug: "international-medical-university",
     program: "mbbs",
-    title: "Insider Program at Galgotias",
+    title: "MBBS in Kyrgyzstan",
     description:
-      "The Insider Program at Galgotias University provides exclusive insights into industry trends, expert mentorship, and hands-on experience.",
+      "Studying MBBS in Kyrgyzstan is a wise decision for International students seeking quality education at an affordable price. The medical universities in this country emphasize a good mix of theoretical knowledge and practical skills.",
     duration: "6 months",
     eligibility: "Open to all undergraduate students.",
     fee: "$500",
+    session: "january to februrary",
+    about:"Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living."
   },
   {
     slug: "international-medical-university",

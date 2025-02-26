@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import { ArrowRight, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 // Define Blog type
@@ -12,11 +12,9 @@ interface Blog {
   id: number;
   title: string;
   excerpt: string;
-  author: string;
+
   date: string;
   imageUrl: string;
-  readTime: number;
-  category: string;
 }
 
 // Dummy API function (replace with actual API call)
@@ -28,33 +26,27 @@ async function fetchBlogs(): Promise<Blog[]> {
       title: "Mastering Digital Marketing in 2024",
       excerpt:
         "Discover the latest strategies and tools that are reshaping digital marketing landscape.",
-      author: "Emily Rodriguez",
+
       date: "2024-02-10",
       imageUrl: "/programs/1.jpg",
-      readTime: 5,
-      category: "Marketing",
     },
     {
       id: 2,
       title: "The Future of Web Development",
       excerpt:
         "Explore emerging technologies and frameworks that are revolutionizing web development.",
-      author: "Alex Chen",
+
       date: "2024-02-08",
       imageUrl: "/programs/2.jpg",
-      readTime: 7,
-      category: "Technology",
     },
     {
       id: 3,
       title: "UX Design Principles for 2024",
       excerpt:
         "Learn how to create intuitive and engaging user experiences in the modern digital world.",
-      author: "Sarah Thompson",
+
       date: "2024-02-05",
       imageUrl: "/programs/3.jpg",
-      readTime: 6,
-      category: "Design",
     },
   ];
 }
@@ -123,16 +115,6 @@ export default function AllBlogs() {
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
-                    <span className="bg-indigo-50 text-[#e86034] px-2 py-1 rounded-full">
-                      {blog.category}
-                    </span>
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>{blog.readTime} min read</span>
-                    </div>
-                  </div>
-
                   <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#e86034] transition-colors h-6 line-clamp-2">
                     {blog.title}
                   </h3>
@@ -143,9 +125,7 @@ export default function AllBlogs() {
 
                   <div className="flex justify-between items-center mt-auto">
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-700">
-                        By {blog.author}
-                      </span>
+                      <span className="text-sm text-gray-700">By Admin</span>
                     </div>
                     <span className="text-sm text-gray-500">
                       {format(new Date(blog.date), "MMM dd, yyyy")}

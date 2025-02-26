@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -83,6 +84,9 @@ const states = [
 ];
 
 export default function LoanForm() {
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -95,8 +99,10 @@ export default function LoanForm() {
       message: "",
     },
   });
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setError("");
+    setSuccess("");
+
     try {
       // Submit to backend API
       const backendResponse = await fetch("/api/loan-form", {
@@ -128,17 +134,28 @@ export default function LoanForm() {
       ]);
 
       if (backendResult.success && web3Result.success) {
+        setSuccess("Form submitted successfully! We will contact you soon.");
         form.reset();
+        setTimeout(() => {
+          setOpen(false);
+          setSuccess("");
+        }, 2000);
       } else {
-        throw new Error(backendResult.message || web3Result.message);
+        throw new Error(
+          backendResult.message || web3Result.message || "Something went wrong"
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form"
+      );
     }
   }
-
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-orange-500 hover:bg-orange-600 text-white">
           Apply for Loan
@@ -243,25 +260,37 @@ export default function LoanForm() {
                     </FormItem>
                   )}
                 />
-                <Button
-                  type="submit"
-                  className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow-md"
-                >
-                  Request a Callback
-                </Button>
+                <div className="flex flex-col w-full">
+                  {error && (
+                    <p className="text-red-500 text-sm text-center mb-2">
+                      {error}
+                    </p>
+                  )}
+                  {success && (
+                    <p className="text-green-500 text-sm text-center mb-2">
+                      {success}
+                    </p>
+                  )}
+                  <Button
+                    type="submit"
+                    className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow-md"
+                  >
+                    Request a Callback
+                  </Button>
+                </div>
               </div>
             </form>
             <span className="w-full flex items-center justify-center text-center text-sm text-gray-600 mt-4">
-          <span>Design and Developed by </span>
-          <a
-            href="https://www.coderxpoint.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-orange-500 pl-1 hover:text-orange-600 font-semibold"
-          >
-            CoderXpoint
-          </a>
-        </span>
+              <span>Design and Developed by </span>
+              <a
+                href="https://www.coderxpoint.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-500 pl-1 hover:text-orange-600 font-semibold"
+              >
+                CoderXpoint
+              </a>
+            </span>
           </Form>
         </div>
       </DialogContent>

@@ -9,7 +9,76 @@ export const programsDetails = [
     eligibility: "Open to all undergraduate students.",
     fee: "$500",
     session: "january to februrary",
-    about:"Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living."
+    about:
+      "Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living.",
+    curriculum: {
+      semester1: {
+        title: "First Semester",
+        courses: [
+          { name: "Human Anatomy", credits: 4 },
+          { name: "Medical Biology", credits: 3 },
+          { name: "Medical Chemistry", credits: 3 },
+          { name: "Medical Physics", credits: 3 },
+          { name: "Latin Language", credits: 2 },
+        ],
+      },
+      semester2: {
+        title: "Second Semester",
+        courses: [
+          { name: "Histology", credits: 4 },
+          { name: "Biochemistry", credits: 4 },
+          { name: "Physiology", credits: 4 },
+          { name: "Medical Ethics", credits: 2 },
+        ],
+      },
+      semester3: {
+        title: "Third Semester",
+        courses: [
+          { name: "Pathology", credits: 4 },
+          { name: "Pharmacology", credits: 4 },
+          { name: "Microbiology", credits: 3 },
+          { name: "Clinical Skills", credits: 3 },
+        ],
+      },
+      semester4: {
+        title: "Fourth Semester",
+        courses: [
+          { name: "Internal Medicine", credits: 5 },
+          { name: "Surgery", credits: 5 },
+          { name: "Pediatrics", credits: 4 },
+          { name: "Obstetrics & Gynecology", credits: 4 },
+        ],
+      },
+      semester5: {
+        title: "Fifth Semester",
+        courses: [
+          { name: "Clinical Rotations", credits: 8 },
+          { name: "Emergency Medicine", credits: 4 },
+          { name: "Family Medicine", credits: 4 },
+        ],
+      },
+      semester6: {
+        title: "Sixth Semester",
+        courses: [
+          { name: "Advanced Clinical Practice", credits: 8 },
+          { name: "Medical Research", credits: 4 },
+          { name: "Healthcare Management", credits: 4 },
+        ],
+      },
+    },
+  },
+  {
+    slug: "international-medical-university",
+    program: "mbbs",
+    title: "MBBS in Kyrgyzstan",
+    description:
+      "Studying MBBS in Kyrgyzstan is a wise decision for International students seeking quality education at an affordable price. The medical universities in this country emphasize a good mix of theoretical knowledge and practical skills.",
+    duration: "6 months",
+    eligibility: "Open to all undergraduate students.",
+    fee: "$500",
+    session: "january to februrary",
+    about:
+      "Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living.",
   },
   {
     slug: "international-medical-university",

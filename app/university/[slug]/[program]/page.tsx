@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ApplyUniversity } from "@/components/ApplyToUniversity";
 import { DownloadBrochure } from "@/components/DownloadBrochure";
 import Link from "next/link";
 import { GraduationCap, Award, DollarSign } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import ImageSlider from "./_components/ImageSlider";
 
 type ProgramParams = {
   slug: string;
@@ -227,8 +228,62 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
           </div>
           {/* quality education  */}
 
-          {/* Curriculam struct */}
-          {/* Curriculam struct */}
+          {/* Curriculum Structure */}
+          <div className="w-full">
+            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+              Curriculum Structure
+            </h2>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {programData.curriculum &&
+                Object.entries(programData.curriculum).map(
+                  ([key, semester]: [string, any]) => (
+                    <AccordionItem
+                      key={key}
+                      value={key}
+                      className="bg-white rounded-lg border border-gray-200"
+                    >
+                      <AccordionTrigger className="px-6 py-4 hover:bg-gray-50">
+                        <h3 className="text-2xl font-semibold text-[#00306e]">
+                          {semester.title}
+                        </h3>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-4">
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse">
+                            <thead className="bg-gray-50">
+                              <tr>
+                                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 border-b">
+                                  Course Name
+                                </th>
+                                <th className="px-4 py-3 text-right text-sm font-semibold text-gray-600 border-b">
+                                  Credits
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {semester.courses.map(
+                                (course: any, index: number) => (
+                                  <tr key={index} className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-700 border-b">
+                                      {course.name}
+                                    </td>
+                                    <td className="px-4 py-3 text-right text-[#e86034] font-semibold border-b">
+                                      {course.credits} Credits
+                                    </td>
+                                  </tr>
+                                )
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )
+                )}
+            </Accordion>
+          </div>
+
+          <ImageSlider/>
 
           {/* fees */}
           {/* fees */}

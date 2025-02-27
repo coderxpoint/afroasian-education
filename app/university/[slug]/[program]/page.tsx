@@ -65,7 +65,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
           <div>
             <Card>
               <CardContent className="p-6">
-                <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+                <h2 className="text-4xl font-bold text-[#00306e] mb-6">
                   About Kyrgyzstan
                 </h2>
                 <div className="prose prose-lg max-w-none">
@@ -115,7 +115,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
           {/* Additional Information start */}
           <div className="">
-            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+            <h2 className="text-4xl font-bold text-[#00306e] mb-6">
               Why Choose This Program?
             </h2>
             <div className="bg-gray-50 p-6 gap-2 flex flex-col rounded-lg">
@@ -139,7 +139,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
           {/* top reasons */}
           <div className="">
-            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+            <h2 className="text-4xl font-bold text-[#00306e] mb-6">
               Top Reasons to Study in Kyrgyzstan
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -190,7 +190,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
           {/* quality education  */}
           <div className="">
-            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+            <h2 className="text-4xl font-bold text-[#00306e] mb-6">
               Quality Education in Kyrgyzstan
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -235,7 +235,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
           {/* Curriculum Structure */}
           <div className="w-full">
-            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+            <h2 className="text-4xl font-bold text-[#00306e] mb-6">
               Curriculum Structure
             </h2>
             <Accordion type="single" collapsible className="w-full space-y-1">
@@ -248,14 +248,14 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
                       className="bg-white rounded-lg border border-gray-200"
                     >
                       <AccordionTrigger className="px-6 py-4 hover:bg-gray-50">
-                        <h3 className="text-2xl font-semibold text-[#00306e]">
+                        <h3 className="text-xl font-semibold text-[#00306e]">
                           {semester.title}
                         </h3>
                       </AccordionTrigger>
-                      <AccordionContent className=" pb-4">
+                      <AccordionContent className="px-3 pb-4">
                         <div className="overflow-x-auto">
                           <table className="w-full border-collapse">
-                            <thead className="bg-gray-50">
+                            <thead className="">
                               <tr>
                                 <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 border-b">
                                   Course Name
@@ -292,7 +292,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
 
           {/* FAQ Section */}
           <div className="w-full">
-            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+            <h2 className="text-4xl font-bold text-[#00306e] mb-6">
               Frequently Asked Questions
             </h2>
             <Accordion type="single" collapsible className="w-full  space-y-1">
@@ -303,7 +303,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
                   className="bg-white rounded-lg border border-gray-200"
                 >
                   <AccordionTrigger className="px-6 py-4 hover:bg-gray-50">
-                    <h3 className="text-2xl font-semibold text-[#00306e]">
+                    <h3 className="text-xl font-semibold text-[#00306e]">
                       {item.question}
                     </h3>
                   </AccordionTrigger>

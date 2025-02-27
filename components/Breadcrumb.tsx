@@ -44,7 +44,7 @@ export function Breadcrumb({
         <h1 className={`text-center mb-4 ${titleClassName}`}>{title}</h1>
       )}
       <nav aria-label="Breadcrumb">
-        <ol className="flex items-center w-full justify-center space-x-2 text-sm text-white">
+        <ol className="flex items-center w-full justify-center space-x-2 lg:text-base text-xs text-white">
           {breadcrumbItems.map((item, index) => (
             <li key={index} className="flex items-center">
               {index === 0 ? (

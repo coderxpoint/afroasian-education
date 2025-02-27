@@ -233,7 +233,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
             <h2 className="text-5xl font-bold text-[#00306e] mb-6">
               Curriculum Structure
             </h2>
-            <Accordion type="single" collapsible className="w-full space-y-4">
+            <Accordion type="single" collapsible className="w-full space-y-1">
               {programData.curriculum &&
                 Object.entries(programData.curriculum).map(
                   ([key, semester]: [string, any]) => (

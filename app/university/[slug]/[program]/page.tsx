@@ -7,7 +7,12 @@ import { Button } from "@/components/ui/button";
 import { DownloadBrochure } from "@/components/DownloadBrochure";
 import Link from "next/link";
 import { GraduationCap, Award, DollarSign } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import ImageSlider from "./_components/ImageSlider";
 
 type ProgramParams = {
@@ -32,7 +37,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
     <div className="flex flex-col pb-20 gap-20">
       {/* Hero Section */}
       <div
-        className="lg:h-[50vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[50vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
+        className="lg:h-[80vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[50vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
         before:absolute before:inset-0 before:bg-black before:opacity-60 before:backdrop-blur-sm"
       >
         <div className="relative z-10 max-w-6xl px-4 w-full gap-2 flex py-10 justify-center items-start h-full flex-col mx-auto">
@@ -247,7 +252,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
                           {semester.title}
                         </h3>
                       </AccordionTrigger>
-                      <AccordionContent className="px-6 pb-4">
+                      <AccordionContent className=" pb-4">
                         <div className="overflow-x-auto">
                           <table className="w-full border-collapse">
                             <thead className="bg-gray-50">
@@ -283,7 +288,32 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
             </Accordion>
           </div>
 
-          <ImageSlider/>
+          <ImageSlider />
+
+          {/* FAQ Section */}
+          <div className="w-full">
+            <h2 className="text-5xl font-bold text-[#00306e] mb-6">
+              Frequently Asked Questions
+            </h2>
+            <Accordion type="single" collapsible className="w-full  space-y-1">
+              {programData.faq?.map((item, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="bg-white rounded-lg border border-gray-200"
+                >
+                  <AccordionTrigger className="px-6 py-4 hover:bg-gray-50">
+                    <h3 className="text-2xl font-semibold text-[#00306e]">
+                      {item.question}
+                    </h3>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-4 px-6">
+                    <p className="text-gray-700 text-lg">{item.answer}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
 
           {/* fees */}
           {/* fees */}

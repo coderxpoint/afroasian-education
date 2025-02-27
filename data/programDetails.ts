@@ -9,6 +9,34 @@ export const programsDetails = [
     eligibility: "Open to all undergraduate students.",
     fee: "$500",
     session: "january to februrary",
+    faq: [
+      {
+        question: "What are the admission requirements for MBBS in Kyrgyzstan?",
+        answer:
+          "The basic requirements include completion of 10+2 with Physics, Chemistry, and Biology, minimum 50% marks, NEET qualification, and age between 17-25 years.",
+      },
+      {
+        question:
+          "Is the MBBS degree from Kyrgyzstan recognized internationally?",
+        answer:
+          "Yes, MBBS degrees from Kyrgyz medical universities are recognized by WHO, UNESCO, and various medical councils including NMC (formerly MCI).",
+      },
+      {
+        question: "What is the medium of instruction?",
+        answer:
+          "The medium of instruction is English for international students, making it convenient for students from English-speaking countries.",
+      },
+      {
+        question: "What is the total cost of studying MBBS in Kyrgyzstan?",
+        answer:
+          "The total cost is relatively affordable compared to private medical colleges, including tuition fees, accommodation, and living expenses.",
+      },
+      {
+        question: "Are there any language barriers for international students?",
+        answer:
+          "No, as the medium of instruction is English. However, students will also learn basic Russian/Kyrgyz for better communication with local patients during clinical practice.",
+      },
+    ],
     about:
       "Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living.",
     curriculum: {
@@ -77,6 +105,34 @@ export const programsDetails = [
     eligibility: "Open to all undergraduate students.",
     fee: "$500",
     session: "january to februrary",
+    faq: [
+      {
+        question: "What are the admission requirements for MBBS in Kyrgyzstan?",
+        answer:
+          "The basic requirements include completion of 10+2 with Physics, Chemistry, and Biology, minimum 50% marks, NEET qualification, and age between 17-25 years.",
+      },
+      {
+        question:
+          "Is the MBBS degree from Kyrgyzstan recognized internationally?",
+        answer:
+          "Yes, MBBS degrees from Kyrgyz medical universities are recognized by WHO, UNESCO, and various medical councils including NMC (formerly MCI).",
+      },
+      {
+        question: "What is the medium of instruction?",
+        answer:
+          "The medium of instruction is English for international students, making it convenient for students from English-speaking countries.",
+      },
+      {
+        question: "What is the total cost of studying MBBS in Kyrgyzstan?",
+        answer:
+          "The total cost is relatively affordable compared to private medical colleges, including tuition fees, accommodation, and living expenses.",
+      },
+      {
+        question: "Are there any language barriers for international students?",
+        answer:
+          "No, as the medium of instruction is English. However, students will also learn basic Russian/Kyrgyz for better communication with local patients during clinical practice.",
+      },
+    ],
     about:
       "Kyrgyzstan, located in the heart of Central Asia, is celebrated for its breathtaking landscapes, vibrant culture, and welcoming hospitality. This tranquil country beautifully combines tradition with modernity, creating a safe and inviting atmosphere for students from around the world. For Indian students, Kyrgyzstan offers a sense of home away from home, thanks to its friendly residents and cost-effective living.",
   },

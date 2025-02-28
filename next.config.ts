@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     appIsrStatus: false,
   },
   images: {
-    domains: ['snehaltayde.com'],
+    domains: ['img.freepik.com'],
   },
   redirects: async () => [
     {

@@ -12,50 +12,69 @@ interface Blog {
   id: number;
   title: string;
   excerpt: string;
-  date: string;
-  imageUrl: string;
-  readTime: number;
-  category: string;
+  content?: string;
+  created_at: string;
+  updated_at?: string;
+  slug: string;
+  image_url?: string;
+  readTime?: number;
+  category?: string;
 }
 
-// Dummy API function (replace with actual API call)
+// Fetch blogs from API
 async function fetchBlogs(): Promise<Blog[]> {
-  // Simulating an API call
-  return [
-    {
-      id: 1,
-      title: "MBBS in Kyrgyzstan for Indian Students 2025-26: Fees & Admission",
-      excerpt:
-        "Are you interested in pursuing your medical degree outside India? Kyrgyzstan offers the best MBBS degree programs to thousands of Indian students every year. It is top-class and highly affordable. ",
-
-      date: "2024-02-10",
-      imageUrl: "/programs/1.webp",
-      readTime: 5,
-      category: "Marketing",
-    },
-    {
-      id: 2,
-      title: "The Ultimate Guide to Studying in Kyrgyzstan in 2025",
-      excerpt:
-        "It is an amazing experience to study in the best facilities of leading global universities in Kyrgyzstan. Students feel comfortable in English-friendly medical classes and enjoy growing up in a multicultural environment.",
-
-      date: "2024-02-08",
-      imageUrl: "/programs/2.webp",
-      readTime: 7,
-      category: "Technology",
-    },
-    {
-      id: 3,
-      title: "Admission Consultants for MBBS in Kyrgyzstan",
-      excerpt:
-        "Kyrgyzstan is one of the top choices for students who wish to pursue medical education abroad. The tuition fee for the entire course is under 18 lakh rupees for Indian students which makes it a very affordable and good option to pursue quality education.",
-
-      date: "2024-02-05",
-      imageUrl: "/programs/3.jpg",
-      readTime: 6,
-      category: "Design",
-    },
-  ];
+  try {
+    const response = await fetch("/api/blogs");
+    if (!response.ok) {
+      throw new Error("Failed to fetch blogs");
+    }
+    const data = await response.json();
+    
+    // Add default values for readTime and category if not present
+    return data.map((blog: Blog) => ({
+      ...blog,
+      readTime: blog.readTime || 5,
+      category: blog.category || "Education"
+    })).slice(0, 3); // Only get the first 3 blogs for homepage
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    // Fallback data in case API fails
+    return [
+      {
+        id: 1,
+        title: "MBBS in Kyrgyzstan for Indian Students 2025-26: Fees & Admission",
+        excerpt:
+          "Are you interested in pursuing your medical degree outside India? Kyrgyzstan offers the best MBBS degree programs to thousands of Indian students every year. It is top-class and highly affordable. ",
+        created_at: "2024-02-10",
+        image_url: "/programs/1.webp",
+        readTime: 5,
+        category: "Marketing",
+        slug: "mbbs-in-kyrgyzstan"
+      },
+      {
+        id: 2,
+        title: "The Ultimate Guide to Studying in Kyrgyzstan in 2025",
+        excerpt:
+          "It is an amazing experience to study in the best facilities of leading global universities in Kyrgyzstan. Students feel comfortable in English-friendly medical classes and enjoy growing up in a multicultural environment.",
+        created_at: "2024-02-08",
+        image_url: "/programs/2.webp",
+        readTime: 7,
+        category: "Technology",
+        slug: "guide-to-studying-in-kyrgyzstan"
+      },
+      {
+        id: 3,
+        title: "Admission Consultants for MBBS in Kyrgyzstan",
+        excerpt:
+          "Kyrgyzstan is one of the top choices for students who wish to pursue medical education abroad. The tuition fee for the entire course is under 18 lakh rupees for Indian students which makes it a very affordable and good option to pursue quality education.",
+        created_at: "2024-02-05",
+        image_url: "/programs/3.jpg",
+        readTime: 6,
+        category: "Design",
+        slug: "admission-consultants-mbbs-kyrgyzstan"
+      },
+    ];
+  }
 }
 
 export default function BlogsHome() {
@@ -106,13 +125,13 @@ export default function BlogsHome() {
 
         {/* Blogs Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {blogs.slice(0, 3).map((blog) => (
-            <Link href={`#`} key={blog.id} className="group">
+          {blogs.map((blog) => (
+            <Link href={`/blogs/${blog.slug}`} key={blog.id} className="group">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
                 {/* Blog Image */}
                 <div className="relative h-56 w-full">
                   <Image
-                    src={blog.imageUrl}
+                    src={blog.image_url || "/programs/1.jpg"}
                     alt={blog.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -142,23 +161,10 @@ export default function BlogsHome() {
                     {blog.excerpt}
                   </p>
 
-                  {/* 
-                  <div className="flex justify-between items-center mt-auto">
-                    <div className="flex items-center">
-                      <span className="text-sm text-gray-700">
-                        By {blog.           </span>
-                    </div>
-                    <span className="text-sm text-gray-500">
-                      {format(new Date(blog.date), "MMM dd, yyyy")}
-                    </span>
-                  </div>
-
-                  {/* Read More */}
                   <div className="mt-4 flex items-center text-[#e86034] group-hover:text-[#e86034] transition-colors">
-                    {/* <span className="mr-2">Read More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  */}
-                    {/* <EnrollButton/> */}
+                    <span className="text-sm text-gray-500">
+                      {format(new Date(blog.created_at), "MMM dd, yyyy")}
+                    </span>
                   </div>
                 </div>
               </div>

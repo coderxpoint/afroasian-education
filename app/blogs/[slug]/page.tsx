@@ -2,35 +2,35 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import Breadcrumb from "@/components/Breadcrumb";
 
-interface WordPressPost {
+interface BlogPost {
   id: number;
-  title: {
-    rendered: string;
-  };
-  content: {
-    rendered: string;
-  };
-  date: string;
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{
-      source_url: string;
-    }>;
-  };
+  title: string;
+  content: string;
+  excerpt: string;
+  created_at: string;
+  updated_at: string;
+  slug: string;
+  image_url?: string;
 }
 
-async function getPost(slug: string): Promise<WordPressPost | null> {
+async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const response = await fetch(
-      `https://snehaltayde.com/wp-json/wp/v2/posts?slug=${slug}&_embed`,
-      { next: { revalidate: 3600 } } // Revalidate every hour
+      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/blogs?slug=${slug}`,
+      { 
+        next: { revalidate: 3600 },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
     );
     
     if (!response.ok) {
       throw new Error("Failed to fetch post");
     }
 
-    const posts = await response.json();
-    return posts[0] || null;
+    const post = await response.json();
+    return post || null;
   } catch (error) {
     console.error("Error fetching post:", error);
     return null;
@@ -74,26 +74,27 @@ export default async function BlogPost({
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center">
-          <Breadcrumb title="Blog Details" className="text-white" />
+          <Breadcrumb title={post.title} className="text-white" />
         </div>
       </div>
 
-      <article className="max-w-4xl mx-auto px-4 pb-20">
+      <article className="max-w-6xl w-full mx-auto px-4 pb-20">
         <header className="mb-8">
           <h1 
-            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
-            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-          />
+            className="text-4xl font-bold mb-4 text-gray-900"
+          >
+            {post.title}
+          </h1>
           <div className="flex items-center text-gray-600">
-            <span>Published on {format(new Date(post.date), "MMMM dd, yyyy")}</span>
+            <span>Published on {format(new Date(post.created_at), "MMMM dd, yyyy")}</span>
           </div>
         </header>
 
-        {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+        {post.image_url && (
           <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
             <img
-              src={post._embedded["wp:featuredmedia"][0].source_url}
-              alt={post.title.rendered}
+              src={post.image_url}
+              alt={post.title}
               className="object-cover w-full h-full"
             />
           </div>
@@ -101,7 +102,7 @@ export default async function BlogPost({
 
         <div 
           className="prose prose-lg max-w-none"
-          dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+          dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </article>
     </div>

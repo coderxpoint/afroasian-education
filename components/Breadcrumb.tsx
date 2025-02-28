@@ -127,8 +127,8 @@ export function generateBreadcrumbs(
     const label =
       customMapping[segment] ||
       customMapping[href] ||
-      segment
-        .split("-")
+      decodeURIComponent(segment)
+        .split(/[-\s]/) // Split by hyphens and spaces
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 

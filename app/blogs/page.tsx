@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 
 export default function BlogsPage() {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-20 pb-20">
       <div
         className="lg:h-[35vh] bg-[url('/about-breadcumb.jpg')] bg-center bg-cover bg-no-repeat h-[20vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
         before:absolute before:inset-0 before:bg-black before:opacity-60 before:backdrop-blur-sm"

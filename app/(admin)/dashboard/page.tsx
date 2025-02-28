@@ -9,6 +9,7 @@ import ApplyToUniversityFormSection from "./_components/ApplyToUniversityFormSec
 import { useRouter } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 import AdmissionForm from "./_components/AdmissionForm";
+import BlogSection from "./_components/BlogSection";
 
 const DashboardPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("contact");
@@ -80,7 +81,17 @@ const DashboardPage: React.FC = () => {
                   activeTab === "admission" ? "bg-gray-600" : ""
                 }`}
               >
-               Admission Form
+                Admission Form
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setActiveTab("blogs")}
+                className={`w-full text-left p-2 rounded hover:bg-gray-700 ${
+                  activeTab === "blogs" ? "bg-gray-600" : ""
+                }`}
+              >
+                Blog Management
               </button>
             </li>
           </ul>
@@ -97,6 +108,7 @@ const DashboardPage: React.FC = () => {
             <TabsTrigger value="enroll_now">Enroll Now Form</TabsTrigger>
             <TabsTrigger value="university">University Form</TabsTrigger>
             <TabsTrigger value="admission">Admission Form</TabsTrigger>
+            <TabsTrigger value="blogs">Blog Management</TabsTrigger>
           </TabsList>
           <TabsContent value="contact">
             <ContactFormSection />
@@ -112,6 +124,9 @@ const DashboardPage: React.FC = () => {
           </TabsContent>
           <TabsContent value="admission">
             <AdmissionForm />
+          </TabsContent>
+          <TabsContent value="blogs">
+            <BlogSection />
           </TabsContent>
         </Tabs>
       </div>

@@ -4,57 +4,54 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Clock } from "lucide-react";
+import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 // Define Blog type
 interface Blog {
   id: number;
   title: string;
   excerpt: string;
-
   date: string;
   imageUrl: string;
+  slug?: string;
 }
 
-// Dummy API function (replace with actual API call)
 async function fetchBlogs(): Promise<Blog[]> {
-  // Simulating an API call
-  return [
-    {
-      id: 1,
-      title: "Mastering Digital Marketing in 2024",
-      excerpt:
-        "Discover the latest strategies and tools that are reshaping digital marketing landscape.",
+  try {
+    const response = await fetch("https://dummyjson.com/posts");
+    if (!response.ok) {
+      throw new Error("Failed to fetch blogs");
+    }
+    const data = await response.json();
 
-      date: "2024-02-10",
-      imageUrl: "/programs/1.jpg",
-    },
-    {
-      id: 2,
-      title: "The Future of Web Development",
-      excerpt:
-        "Explore emerging technologies and frameworks that are revolutionizing web development.",
-
-      date: "2024-02-08",
-      imageUrl: "/programs/2.jpg",
-    },
-    {
-      id: 3,
-      title: "UX Design Principles for 2024",
-      excerpt:
-        "Learn how to create intuitive and engaging user experiences in the modern digital world.",
-
-      date: "2024-02-05",
-      imageUrl: "/programs/3.jpg",
-    },
-  ];
+    // Map the API response to our Blog interface
+    return data.posts.map((post: any) => {
+      const slug = post.title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+      return {
+        id: post.id,
+        title: post.title,
+        excerpt: post.body,
+        date: new Date().toISOString(),
+        imageUrl: `/programs/${(post.id % 3) + 1}.jpg`,
+        slug: slug,
+      };
+    });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return [];
+  }
 }
 
 export default function AllBlogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 6;
 
   useEffect(() => {
     async function loadBlogs() {
@@ -75,12 +72,23 @@ export default function AllBlogs() {
     blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Calculate pagination
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
+  const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   if (isLoading) {
     return (
       <section className="w-full px-4 py-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-pulse">
-            {[1, 2, 3].map((_, index) => (
+            {[1, 2, 3, 4, 5, 6].map((_, index) => (
               <div key={index} className="bg-gray-200 h-80 rounded-xl"></div>
             ))}
           </div>
@@ -97,13 +105,16 @@ export default function AllBlogs() {
             type="text"
             placeholder="Search blogs..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setCurrentPage(1); // Reset to first page when searching
+            }}
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {filteredBlogs.map((blog) => (
-            <Link href={`#`} key={blog.id} className="group">
+          {currentBlogs.map((blog) => (
+            <Link href={`/blogs/${blog.slug}`} key={blog.id} className="group">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
                 <div className="relative h-56 w-full">
                   <Image
@@ -131,17 +142,51 @@ export default function AllBlogs() {
                       {format(new Date(blog.date), "MMM dd, yyyy")}
                     </span>
                   </div>
-
-                  <div className="mt-4 flex items-center text-[#e86034] group-hover:text-[#e86034] transition-colors">
-                    {/* <span className="mr-2">Read More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    */}
-                  </div>
                 </div>
               </div>
             </Link>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center space-x-2 mt-12">
+            <Button
+              variant="outline"
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="p-2"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (number) => (
+                <Button
+                  key={number}
+                  onClick={() => paginate(number)}
+                  variant={currentPage === number ? "default" : "outline"}
+                  className={`px-4 py-2 ${
+                    currentPage === number
+                      ? "bg-[#e86034] text-white hover:bg-[#e86034]"
+                      : ""
+                  }`}
+                >
+                  {number}
+                </Button>
+              )
+            )}
+
+            <Button
+              variant="outline"
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="p-2"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

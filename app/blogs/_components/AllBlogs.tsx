@@ -184,6 +184,8 @@ export default function AllBlogs() {
           </div>
         )}
       </div>
+
+      
     </section>
   );
 }

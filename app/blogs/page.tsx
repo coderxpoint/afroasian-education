@@ -33,6 +33,7 @@ export default function BlogsPage() {
         </div>
       </div>
       <AllBlogs />
+           
     </div>
   );
 }

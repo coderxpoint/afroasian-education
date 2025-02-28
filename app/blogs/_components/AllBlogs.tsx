@@ -8,75 +8,69 @@ import { Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-// Define Blog type
-interface Blog {
+// Define WordPress Post type
+interface WordPressPost {
   id: number;
-  title: string;
-  excerpt: string;
+  title: {
+    rendered: string;
+  };
+  excerpt: {
+    rendered: string;
+  };
   date: string;
-  imageUrl: string;
-  slug?: string;
+  slug: string;
+  _embedded?: {
+    "wp:featuredmedia"?: Array<{
+      source_url: string;
+    }>;
+  };
 }
 
-async function fetchBlogs(): Promise<Blog[]> {
+async function fetchPosts(): Promise<WordPressPost[]> {
   try {
-    const response = await fetch("https://dummyjson.com/posts");
+    const response = await fetch("https://snehaltayde.com/wp-json/wp/v2/posts?_embed");
     if (!response.ok) {
-      throw new Error("Failed to fetch blogs");
+      throw new Error("Failed to fetch posts");
     }
     const data = await response.json();
-
-    // Map the API response to our Blog interface
-    return data.posts.map((post: any) => {
-      const slug = post.title.toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
-      return {
-        id: post.id,
-        title: post.title,
-        excerpt: post.body,
-        date: new Date().toISOString(),
-        imageUrl: `/programs/${(post.id % 3) + 1}.jpg`,
-        slug: slug,
-      };
-    });
+    return data;
   } catch (error) {
-    console.error("Error fetching blogs:", error);
+    console.error("Error fetching posts:", error);
     return [];
   }
 }
 
 export default function AllBlogs() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [posts, setPosts] = useState<WordPressPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 6;
+  const postsPerPage = 6;
 
   useEffect(() => {
-    async function loadBlogs() {
+    async function loadPosts() {
       try {
-        const fetchedBlogs = await fetchBlogs();
-        setBlogs(fetchedBlogs);
+        const fetchedPosts = await fetchPosts();
+        setPosts(fetchedPosts);
         setIsLoading(false);
       } catch (error) {
-        console.error("Failed to fetch blogs:", error);
+        console.error("Failed to fetch posts:", error);
         setIsLoading(false);
       }
     }
 
-    loadBlogs();
+    loadPosts();
   }, []);
 
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredPosts = posts.filter((post) =>
+    post.title.rendered.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Calculate pagination
-  const indexOfLastBlog = currentPage * blogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
-  const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -107,39 +101,41 @@ export default function AllBlogs() {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); // Reset to first page when searching
+              setCurrentPage(1);
             }}
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {currentBlogs.map((blog) => (
-            <Link href={`/blogs/${blog.slug}`} key={blog.id} className="group">
+          {currentPosts.map((post) => (
+            <Link href={`/blogs/${post.slug}`} key={post.id} className="group">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col h-full">
                 <div className="relative h-56 w-full">
                   <Image
-                    src={blog.imageUrl}
-                    alt={blog.title}
+                    src={post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || `/programs/1.jpg`}
+                    alt={post.title.rendered}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#e86034] transition-colors h-6 line-clamp-2">
-                    {blog.title}
-                  </h3>
+                  <h3 
+                    className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#e86034] transition-colors h-6 line-clamp-2"
+                    dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                  />
 
-                  <p className="text-gray-600 mb-4 flex-grow line-clamp-3">
-                    {blog.excerpt}
-                  </p>
+                  <div 
+                    className="text-gray-600 mb-4 flex-grow line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                  />
 
                   <div className="flex justify-between items-center mt-auto">
                     <div className="flex items-center">
                       <span className="text-sm text-gray-700">By Admin</span>
                     </div>
                     <span className="text-sm text-gray-500">
-                      {format(new Date(blog.date), "MMM dd, yyyy")}
+                      {format(new Date(post.date), "MMM dd, yyyy")}
                     </span>
                   </div>
                 </div>

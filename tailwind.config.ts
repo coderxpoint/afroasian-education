@@ -96,8 +96,46 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%', // Ensures content spans full width of container
+            color: 'inherit',
+            a: {
+              color: '#e86034',
+              '&:hover': {
+                color: '#ff7f50',
+              },
+            },
+            strong: {
+              color: 'inherit',
+            },
+            h1: {
+              color: 'inherit',
+            },
+            h2: {
+              color: 'inherit',
+            },
+            h3: {
+              color: 'inherit',
+            },
+            h4: {
+              color: 'inherit',
+            },
+            code: {
+              color: 'inherit',
+            },
+            img: {
+              borderRadius: '0.5rem',
+            },
+          },
+        },
+      },
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;

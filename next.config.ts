@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   devIndicators: {
     appIsrStatus: false,
   },
+  images: {
+    domains: ['snehaltayde.com'],
+  },
   redirects: async () => [
     {
       source: "/international-medical-university",

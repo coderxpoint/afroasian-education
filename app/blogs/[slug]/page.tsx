@@ -1,95 +1,109 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Breadcrumb from "@/components/Breadcrumb";
 
-async function getBlogBySlug(slug: string) {
+interface WordPressPost {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+  };
+  date: string;
+  _embedded?: {
+    "wp:featuredmedia"?: Array<{
+      source_url: string;
+    }>;
+  };
+}
+
+async function getPost(slug: string): Promise<WordPressPost | null> {
   try {
-    const response = await fetch("https://dummyjson.com/posts");
+    const response = await fetch(
+      `https://snehaltayde.com/wp-json/wp/v2/posts?slug=${slug}&_embed`,
+      { next: { revalidate: 3600 } } // Revalidate every hour
+    );
+    
     if (!response.ok) {
-      throw new Error("Failed to fetch blogs");
+      throw new Error("Failed to fetch post");
     }
-    const data = await response.json();
-    const post = data.posts.find((post: any) => {
-      const postSlug = post.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-      return postSlug === slug;
-    });
 
-    return {
-      id: post.id,
-      title: post.title,
-      content: post.body,
-      date: new Date().toISOString(),
-      imageUrl: `/programs/${(post.id % 3) + 1}.jpg`,
-    };
+    const posts = await response.json();
+    return posts[0] || null;
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    console.error("Error fetching post:", error);
     return null;
   }
 }
 
-export default async function BlogPage({
+export default async function BlogPost({
   params,
 }: {
   params: { slug: string };
 }) {
-  const blog = await getBlogBySlug(params.slug);
+  const post = await getPost(params.slug);
 
-  if (!blog) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
-        <h1 className="text-2xl font-bold mb-4">Blog not found</h1>
-        <Link href="/blogs">
-          <Button variant="outline" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blogs
-          </Button>
-        </Link>
-      </div>
-    );
+  if (!post) {
+    notFound();
   }
 
   return (
-    <article className="max-w-6xl mx-auto px-4 py-12">
-      <div className="mb-8">
-        <Link href="/blogs">
-          <Button variant="outline" className="flex items-center gap-2 mb-6">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blogs
-          </Button>
-        </Link>
+    <div className="flex flex-col gap-20">
+      <div
+        className="lg:h-[35vh] bg-[url('/about-breadcumb.jpg')] bg-center bg-cover bg-no-repeat h-[20vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
+        before:absolute before:inset-0 before:bg-black before:opacity-60 before:backdrop-blur-sm"
+      >
+        {/* SVG Background */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          className="absolute inset-0 w-full h-full opacity-20"
+        >
+          <path
+            fill="#e86034"
+            fillOpacity="0.3"
+            d="M0,160L48,176C96,192,192,224,288,229.3C384,235,480,213,576,181.3C672,149,768,107,864,101.3C960,96,1056,128,1152,154.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320L192,320L96,320L0,320Z"
+          />
+          <path
+            fill="#ff7f50"
+            fillOpacity="0.2"
+            d="M0,64L48,85.3C96,107,192,149,288,154.7C384,160,480,128,576,112C672,96,768,96,864,117.3C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320L192,320L96,320L0,320Z"
+          />
+        </svg>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center">
+          <Breadcrumb title="Blog Details" className="text-white" />
+        </div>
       </div>
 
-      <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
-        <Image
-          src={blog.imageUrl}
-          alt={blog.title}
-          fill
-          className="object-cover"
-          priority
+      <article className="max-w-4xl mx-auto px-4 pb-20">
+        <header className="mb-8">
+          <h1 
+            className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+          />
+          <div className="flex items-center text-gray-600">
+            <span>Published on {format(new Date(post.date), "MMMM dd, yyyy")}</span>
+          </div>
+        </header>
+
+        {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+          <div className="relative w-full h-[400px] mb-8 rounded-xl overflow-hidden">
+            <img
+              src={post._embedded["wp:featuredmedia"][0].source_url}
+              alt={post.title.rendered}
+              className="object-cover w-full h-full"
+            />
+          </div>
+        )}
+
+        <div 
+          className="prose prose-lg max-w-none"
+          dangerouslySetInnerHTML={{ __html: post.content.rendered }}
         />
-      </div>
-
-      <div className="prose prose-lg max-w-none">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{blog.title}</h1>
-
-        <div className="flex items-center gap-4 text-gray-600 mb-8">
-          <span>By Admin</span>
-          <span>•</span>
-          <time dateTime={blog.date}>
-            {format(new Date(blog.date), "MMMM dd, yyyy")}
-          </time>
-        </div>
-
-        <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-          {blog.content}
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
   );
 }

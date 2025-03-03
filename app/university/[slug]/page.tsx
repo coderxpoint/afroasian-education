@@ -401,6 +401,55 @@ export default function UniversityPageDetails({
               </div>
             </div>
 
+            {/* Fees Section */}
+            <div className="w-full max-w-6xl lg:px-0 px-4 flex flex-col">
+              <h2 className="text-4xl font-bold text-gray-800 relative pb-4">
+                Fee Structure
+              </h2>
+              <Table className="mt-6 w-full border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+                <TableHeader>
+                  <TableRow className="bg-gray-200">
+                    <TableHead className="text-left font-semibold text-gray-800 px-4 py-3">
+                      Fee Type
+                    </TableHead>
+                    <TableHead className="text-left font-semibold text-gray-800 px-4 py-3">
+                      Amount
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="text-lg">
+                  <TableRow className="border-b hover:bg-gray-50 transition">
+                    <TableCell className="px-4 py-3 text-gray-700 font-medium">
+                      Tuition Fee
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-700">
+                      {university.fees?.tuition_fee || "Contact for details"}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="border-b hover:bg-gray-50 transition">
+                    <TableCell className="px-4 py-3 text-gray-700 font-medium">
+                      Hostel Fee
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-700">
+                      {university.fees?.hostel_fee || "Contact for details"}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="border-b hover:bg-gray-50 transition">
+                    <TableCell className="px-4 py-3 text-gray-700 font-medium">
+                      Mess Fee
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-700">
+                      {university.fees?.mess_fee || "Contact for details"}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <p className="text-sm text-gray-500 mt-4">
+                * Fees are subject to change. Please contact us for the most
+                up-to-date information.
+              </p>
+            </div>
+
             {/* Documents Required Section */}
             <div className="w-full bg-gray-100 lg:px-0 px-4 flex flex-col">
               <div className="max-w-6xl  w-full flex items-center justify-center py-20 flex-col mx-auto">

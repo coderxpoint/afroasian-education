@@ -7,6 +7,11 @@ export interface University {
   description: string;
   descriptionHome: string;
   download: string;
+  fees?: {
+    tuition_fee: string;
+    hostel_fee: string;
+    mess_fee: string;
+  };
 
   student_life?: { sltitle: string; sldesc: string }[]; // Changed to an array of objects
   duration?: string;
@@ -70,6 +75,11 @@ export const universityName: University[] = [
     image: "/imu.webp",
     location: "Kyrgyzstan",
     established: "2003",
+    fees: {
+      tuition_fee: "4000 USD",
+      hostel_fee: "700 USD",
+      mess_fee: "1000 USD",
+    },
     description:
       "International Medical University (IMU), originally established in 2003, is a leading medical institute in Kyrgyzstan. It is recognized for providing excellent medical courses accepted worldwide. The university was founded in 1993 and is recognized by the World Directory of Medical Schools (WDOMS) and the Ministry of Education and Science of Kyrgyzstan. It consists of experienced faculty who conduct their classes in English, which is a major benefit for international students. The university hosts over 3,300 students, including many Indian students. IMU is a well-constructed university with modern infrastructure, including advanced labs and a well-equipped clinic where students are trained during their practical lab sessions. The university also offers education in healthcare and medical science departments. IMU is affiliated with recognized medical institutions which ensures the best clinical training for its students. The educational experience for the students is boosted with a State-of-the-Art Learning Management System (LMS). It is used for tracking their performance and providing them with useful resources. The students are awarded a state-recognized diploma after completing their graduation which is highly valued in Kyrgyzstan and worldwide.",
     descriptionHome:
@@ -248,6 +258,11 @@ export const universityName: University[] = [
     image: "/eiu.webp",
     location: "Kyrgyzstan",
     established: "2019",
+    fees: {
+      tuition_fee: "3500 USD",
+      hostel_fee: "700 USD",
+      mess_fee: "1000 USD",
+    },
     description:
       "Eurasian International University (EIU), originally established as Eurasian International Medical University (EIMU) in 2019 specializes in facilitating quality medical education for both domestic and international medical aspirants. Recognized by the World Directory of Medical Schools (WDOMS) and the Ministry of Education and Science of Kyrgyzstan, EIU has established global credibility in the education sector. The university expanded its academic offerings to varied sectors that include pedagogy, design, and tourism in 2022. EIU hosts over 500 international students in its five-year English-medium MBBS program and facilitates cutting-edge infrastructure featuring twelve specialized laboratories, a vivarium, and a modern clinic for practical training. Strategically affiliated with leading medical institutions, EIU ensures comprehensive clinical training for its students. The innovative Learning Management System (LMS) enhances the educational experience with remote resources and performance tracking. Our expert professionals provide a state diploma to the graduates that is highly recognized in Kyrgyzstan and internationally, ensuring their competitiveness in the global medical job market.",
     descriptionHome:
@@ -306,12 +321,12 @@ export const universityName: University[] = [
     programs: [
       {
         images: "/programs/1.webp",
-        visit:"d-of-medical-and-clinical-discipline",
+        visit: "d-of-medical-and-clinical-discipline",
         s_name: "D. of Medical & Clinical Disciplines",
       },
       {
         images: "/programs/1.webp",
-        visit:"d-of-morpho-physiological-discipline",
+        visit: "d-of-morpho-physiological-discipline",
         s_name: "D. of Morpho-Physiological Disciplines",
       },
     ],

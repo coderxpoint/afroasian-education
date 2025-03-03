@@ -16,7 +16,7 @@ interface BlogPost {
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/blogs?slug=${slug}`,
+      `https://www.afroasianeducation.com/api/blogs?slug=${slug}`,
       { 
         cache: 'no-store',
         headers: {

@@ -436,7 +436,7 @@ export default function UniversityPageDetails({
                   </TableRow>
                   <TableRow className="border-b hover:bg-gray-50 transition">
                     <TableCell className="px-4 py-3 text-gray-700 font-medium">
-                      Mess Fee
+                      OTC
                     </TableCell>
                     <TableCell className="px-4 py-3 text-gray-700">
                       {university.fees?.mess_fee || "Contact for details"}

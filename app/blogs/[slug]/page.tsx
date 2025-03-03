@@ -18,7 +18,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/blogs?slug=${slug}`,
       { 
-        next: { revalidate: 3600 },
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
         },

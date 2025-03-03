@@ -29,7 +29,13 @@ interface WordPressPost {
 
 async function fetchPosts(): Promise<WordPressPost[]> {
   try {
-    const response = await fetch("/api/blogs");
+    const response = await fetch("/api/blogs", {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      next: { revalidate: 0 }
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch posts");
     }
@@ -48,19 +54,29 @@ export default function AllBlogs() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const fetchedPosts = await fetchPosts();
-        setPosts(fetchedPosts);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
-        setIsLoading(false);
-      }
+  const loadPosts = async () => {
+    setIsLoading(true);
+    try {
+      const fetchedPosts = await fetchPosts();
+      setPosts(fetchedPosts);
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
+  useEffect(() => {
     loadPosts();
+  }, []);
+
+  // Refresh data every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadPosts();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const filteredPosts = posts.filter((post) =>

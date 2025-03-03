@@ -12,7 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -63,7 +69,7 @@ const BlogSection: React.FC = () => {
       const headers = {
         authorization: "Bearer token", // Replace with actual token or auth mechanism
       };
-      
+
       const response = await axios.delete(`/api/blogs?id=${id}`, { headers });
       if (response.status === 200) {
         setBlogs(blogs.filter((blog) => blog.id !== id));
@@ -73,11 +79,14 @@ const BlogSection: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
+    const formattedValue = name === "slug" ? value.replace(/\s+/g, "-") : value;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: formattedValue,
     });
   };
 
@@ -88,7 +97,7 @@ const BlogSection: React.FC = () => {
       const headers = {
         authorization: "Bearer token", // Replace with actual token or auth mechanism
       };
-      
+
       const response = await axios.post("/api/blogs", formData, { headers });
       if (response.status === 200) {
         setIsCreating(false);
@@ -127,13 +136,13 @@ const BlogSection: React.FC = () => {
       const headers = {
         authorization: "Bearer token", // Replace with actual token or auth mechanism
       };
-      
+
       const response = await axios.put(
         "/api/blogs",
         { id: currentBlog.id, ...formData },
         { headers }
       );
-      
+
       if (response.status === 200) {
         setIsEditing(false);
         setCurrentBlog(null);
@@ -144,7 +153,8 @@ const BlogSection: React.FC = () => {
           image_url: "",
           excerpt: "",
         });
-        fetchBlogs(); // Refresh the blog list
+        // Immediately fetch updated blog data
+        await fetchBlogs();
       }
     } catch (err: any) {
       setError(err.response?.data?.error || "Failed to update blog");
@@ -204,8 +214,7 @@ const BlogSection: React.FC = () => {
                     name="content"
                     value={formData.content}
                     onChange={handleInputChange}
-                    rows={10}
-                    required
+                    rows={4}
                   />
                 </div>
                 <div className="grid w-full items-center gap-2">
@@ -273,8 +282,7 @@ const BlogSection: React.FC = () => {
                   name="content"
                   value={formData.content}
                   onChange={handleInputChange}
-                  rows={10}
-                  required
+                  rows={4}
                 />
               </div>
               <div className="grid w-full items-center gap-2">
@@ -311,7 +319,9 @@ const BlogSection: React.FC = () => {
               <TableRow key={blog.id}>
                 <TableCell>{blog.title}</TableCell>
                 <TableCell>{blog.slug}</TableCell>
-                <TableCell className="max-w-xs truncate">{blog.excerpt}</TableCell>
+                <TableCell className="max-w-xs truncate">
+                  {blog.excerpt}
+                </TableCell>
                 <TableCell>
                   {new Date(blog.created_at).toLocaleString()}
                 </TableCell>

@@ -444,34 +444,29 @@ export default function UniversityPageDetails({
                   </TableRow>
                 </TableBody>
               </Table>
-              <p className="text-sm text-gray-500 mt-4">
-                * Fees are subject to change. Please contact us for the most
-                up-to-date information.
+              <p className="text-sm text-gray-500 flex flex-col gap-1  mt-4">
+                <span>
+                  * Fees are subject to change. Please contact us for the most
+                  up-to-date information. *
+                </span>
+
+                <span>
+                  * Above Mentioned Tuition Fee is Changeable According to Their
+                  Academic Session. *
+                </span>
+
+                <span>
+                  * For Admission Fee, Documentation & VISA Processing @ 25,000.
+                  *
+                </span>
+
+                <span>
+                  * From 2nd to 6th year's Medical Insurance & VISA Extension
+                  will be Extra (200$). *
+                </span>
+
+                <span>* Flight Ticket Charge Excluded. *</span>
               </p>
-              <div className="mt-6 space-y-2 text-gray-700">
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Above Mentioned Tution Fee Changable According to Their
-                  Academic Session.
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  For Admission Fee, Documentation & VISA Processing @ 99,000.
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Form 2nd to 6th year's Medical Insurance & VISA Extension will
-                  be Extra (200$).
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Flight Ticket Charge Excluded.
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                  Indian Mess Food 120$ Per Month Extra.
-                </p>
-              </div>
             </div>
             {/* Documents Required Section */}
             <div className="w-full bg-gray-100 lg:px-0 px-4 flex flex-col">

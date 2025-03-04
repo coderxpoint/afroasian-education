@@ -448,8 +448,31 @@ export default function UniversityPageDetails({
                 * Fees are subject to change. Please contact us for the most
                 up-to-date information.
               </p>
+              <div className="mt-6 space-y-2 text-gray-700">
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                  Above Mentioned Tution Fee Changable According to Their
+                  Academic Session.
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                  For Admission Fee, Documentation & VISA Processing @ 99,000.
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                  Form 2nd to 6th year's Medical Insurance & VISA Extension will
+                  be Extra (200$).
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                  Flight Ticket Charge Excluded.
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                  Indian Mess Food 120$ Per Month Extra.
+                </p>
+              </div>
             </div>
-
             {/* Documents Required Section */}
             <div className="w-full bg-gray-100 lg:px-0 px-4 flex flex-col">
               <div className="max-w-6xl  w-full flex items-center justify-center py-20 flex-col mx-auto">

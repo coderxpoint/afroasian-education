@@ -65,15 +65,12 @@ export default function Form_program({
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+    <div className="flex items-center justify-center h-full">
       <Card className="w-full max-w-lg bg-white/30 shadow-lg rounded-lg overflow-hidden backdrop-blur-md border border-white/20">
         <CardContent className="p-8">
           <div className="space-y-8">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Program Inquiry
-              </h2>
-              <p className="text-gray-500 mt-2">
+              <p className=" ">
                 Fill in your details below to submit your inquiry
               </p>
             </div>
@@ -84,13 +81,13 @@ export default function Form_program({
                   <Input
                     id="name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
-                    className="w-full"
+                    className="w-full bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -98,13 +95,13 @@ export default function Form_program({
                   <Input
                     id="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="Email Address"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                    className="w-full"
+                    className="w-full bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -112,14 +109,14 @@ export default function Form_program({
                   <Input
                     id="phone"
                     type="tel"
-                    placeholder="1234567890"
+                    placeholder="Phone Number"
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
                     required
                     pattern="[0-9]{10}"
-                    className="w-full"
+                    className="w-full bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">
@@ -127,13 +124,14 @@ export default function Form_program({
                   <Input
                     id="city"
                     type="text"
+                     
                     placeholder="Your City"
                     value={formData.city}
                     onChange={(e) =>
                       setFormData({ ...formData, city: e.target.value })
                     }
                     required
-                    className="w-full"
+                    className="w-full bg-gray-50"
                   />
                 </div>
                 <div className="space-y-2">

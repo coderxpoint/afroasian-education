@@ -38,7 +38,7 @@ export default function ProgramPage({ params }: { params: ProgramParams }) {
     <div className="flex flex-col pb-20 gap-20">
       {/* Hero Section */}
       <div
-        className="lg:h-[100vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[100vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
+        className="lg:h-[90vh] bg-[url('/programs/1.jpg')] bg-center bg-cover bg-no-repeat h-[100vh] relative flex flex-col space-x-4 w-full items-center mx-auto justify-center overflow-hidden 
         before:absolute before:inset-0 before:bg-black before:opacity-60 before:backdrop-blur-sm"
       >
         <div className="relative z-10 max-w-6xl px-4 w-full gap-4 flex py-10 justify-between items-start h-full flex-col lg:flex-row mx-auto">

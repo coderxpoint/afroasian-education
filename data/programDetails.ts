@@ -2,7 +2,7 @@ export const programsDetails = [
   {
     slug: "international-medical-university",
     program: "mbbs",
-    title: "MBBS in Kyrgyzstan",
+    title: "MBBS in International Medical University",
     description:
       "Studying MBBS in Kyrgyzstan is a wise decision for International students seeking quality education at an affordable price. The medical universities in this country emphasize a good mix of theoretical knowledge and practical skills.",
     duration: "6 months",
@@ -139,7 +139,7 @@ export const programsDetails = [
   {
     slug: "international-medical-university",
     program: "master-of-medicine",
-    title: "Computer Science at Galgotias",
+    title: "Master of Medicine in International Medical University",
     description:
       "Galgotias University offers a top-notch Computer Science program focusing on AI, Web Development, and Data Science.",
     duration: "4 years",
@@ -149,7 +149,7 @@ export const programsDetails = [
   {
     slug: "international-medical-university",
     program: "doctor-of-medicine",
-    title: "Business Program at Harvard",
+    title: "Doctor of Medicine in International Medical University",
     description:
       "Harvard's Business Program is designed for future leaders, covering finance, marketing, and entrepreneurship.",
     duration: "2 years",

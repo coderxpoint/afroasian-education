@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import TopBar from "@/components/TopBar";
 import Script from "next/script";
 import { Analytics } from '@vercel/analytics/next';
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Teachers({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({
         <TopBar />
         <Header />
         {children}
+        <Toaster/>
         <Analytics />
         <Footer />
         <WhatsAppButton />

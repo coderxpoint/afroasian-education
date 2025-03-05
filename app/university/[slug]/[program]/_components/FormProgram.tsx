@@ -65,7 +65,7 @@ export default function Form_program({
   };
 
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-start justify-start h-full">
       <Card className="w-full max-w-lg bg-white/30 shadow-lg rounded-lg overflow-hidden backdrop-blur-md border border-white/20">
         <CardContent className="p-8">
           <div className="space-y-8">
